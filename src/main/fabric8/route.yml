@@ -3,6 +3,7 @@ kind: Route
 metadata:
   name: ${project.artifactId}
 spec:
+  host: uptime-monitor.findable.pl
   port:
     targetPort: 8080
   to:
