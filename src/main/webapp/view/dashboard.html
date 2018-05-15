@@ -1,0 +1,8 @@
+<div class="view-dashboard">
+	<h3>Dashboard</h3>
+	<div class="sites">
+		<div v-for="site in sites">
+			<router-link :to="'/site/' + site.name">{{ site.name }} ({{ site.url }})</router-link>
+		</div>
+	</div>
+</div>

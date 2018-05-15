@@ -1,0 +1,24 @@
+<div class="view-site">
+	<h3>Historia {{ site }}</h3>
+	<canvas id="chart" width="400" height="150"></canvas>
+	<div class="logs" v-if="logs">
+		<table class="std-table">
+		<thead>
+		<tr>
+			<th>Status</th>
+			<th>Content length</th>
+			<th>Date</th>
+			<th>Response time</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr v-for="log in logs" :class="'status-' + log.status">
+			<td class="status">{{ log.status }}</td>
+			<td class="content-length">{{ log.contentLength }}</td>
+			<td class="date">{{ log.date.replace('@', ' ') }}</td>
+			<td class="time">{{ log.responseTime }}</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+</div>

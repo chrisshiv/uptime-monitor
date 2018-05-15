@@ -1,4 +1,4 @@
-package pl.findable.uptime;
+package pl.findable.uptime.engine;
 
 import org.springframework.data.repository.CrudRepository;
 
