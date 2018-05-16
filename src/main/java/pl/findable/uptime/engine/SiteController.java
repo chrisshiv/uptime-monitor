@@ -25,6 +25,15 @@ class SiteController {
 		return StreamSupport.stream(siteRepository.findAll().spliterator(), false).collect(Collectors.toList());
 	}
 
+	@GetMapping("{param}")
+	public Site getSite(@PathVariable String param) {
+		try {
+			return siteRepository.findOne(Integer.parseInt(param));
+		} catch (NumberFormatException e) {
+			return siteRepository.findByName(param);
+		}
+	}
+
 	@PostMapping
 	public Site addSite(Site site) {
 		site.setId(0);

@@ -23,7 +23,7 @@ class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		setRealmName("Zaloguj_się,proszę");
+		setRealmName("Zaloguj_sie,prosze");
 		super.afterPropertiesSet();
 	}
 }

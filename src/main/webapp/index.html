@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <title>Uptime Monitor</title>
   <link rel="stylesheet" href="css/app.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 <body>
   <div id="app">
@@ -12,8 +13,8 @@
       <div class="loading" v-if="loading"></div>
     </transition>
 
-    <header>
-      <h1>Uptime Monitor</h1>
+    <header @click="headerTriggered = !headerTriggered" :class="{ triggered: headerTriggered }">
+      <h1>Uptime Monitor {{$route.params.site}}</h1>
       <router-link to="/">Dashboard</router-link>
 	  <router-link v-for="site in sites" :to="'/site/' + site.name">{{ site.name }}</router-link>
     </header>

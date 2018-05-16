@@ -22,6 +22,7 @@ includeTemplates.then(() => {
       sites: false,
 //      currentRoute: window.location.pathname,
       loading: false,
+      headerTriggered: false
     },
   
     created () {
