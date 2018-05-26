@@ -91,6 +91,9 @@ public class Log {
 
 	public void setError(String error) {
 		this.error = error;
+		if (this.error != null && this.error.length() > 200) {
+			this.error = this.error.substring(0, 200) + "...";
+		}
 	}
 
 }

@@ -19,10 +19,18 @@ class SiteController {
 
 	@Autowired
 	private SiteRepository siteRepository;
+	@Autowired
+	private Caller caller;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Site> getSites() {
-		return StreamSupport.stream(siteRepository.findAll().spliterator(), false).collect(Collectors.toList());
+		return StreamSupport
+				.stream(siteRepository.findAll().spliterator(), false)
+				.map(site -> {
+					site.setCurrentStatus(caller.getStatus(site.getId()));
+					return site;
+				})
+				.collect(Collectors.toList());
 	}
 
 	@GetMapping("{param}")

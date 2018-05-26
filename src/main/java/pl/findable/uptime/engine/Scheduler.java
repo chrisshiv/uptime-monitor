@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Scheduler {
 
-	private static final int SCHEDULER_RATE = 5 * 60 * 1000;
+	private static final int SCHEDULER_RATE = 1 * 60 * 1000;
+	private static final long SLEEP_MILLIS = 100;
 
 	@Autowired
 	private SiteRepository siteRepository;
@@ -19,6 +20,10 @@ public class Scheduler {
   public void reportCurrentTime() {
 		siteRepository.findAll().forEach(site -> {
     	caller.checkSite(site);
+    	try {
+				Thread.sleep(SLEEP_MILLIS);
+			} catch (Exception e) {
+			}
     });
   }
 }

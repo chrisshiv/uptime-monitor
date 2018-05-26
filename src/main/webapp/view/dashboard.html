@@ -1,8 +1,12 @@
 <div class="view-dashboard">
 	<h3>Dashboard</h3>
 	<div class="sites">
-		<div v-for="site in sites">
-			<router-link :to="'/site/' + site.name">{{ site.name }} ({{ site.url }})</router-link>
-		</div>
+		<table>
+			<tr v-for="site in sites">
+				<td><router-link :to="'/site/' + site.name">{{ site.name }}</router-link></td>
+				<td><a :href="site.url" target="_blank">{{ site.url }}</a></td>
+				<td>{{ site.currentStatus }}</td>
+			</tr>		
+		</table>
 	</div>
 </div>

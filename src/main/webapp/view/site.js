@@ -3,7 +3,10 @@ const ViewSite = {
 
   data: function() {
     return {
+      pageNumber: 0,
+      zoom: 1,
       site: null,
+      siteInfo: {},
       logs: null,
       chart: null
     }
@@ -21,16 +24,21 @@ const ViewSite = {
 
   watch: {
     // call again the method if the route changes
-    '$route': 'refresh'
+    '$route': 'newRoute'
   },
 
   methods: {
+    newRoute() {
+      this.pageNumber = 0;
+      this.refresh(true);
+    },
     refresh(loading) {
       this.site = this.$route.params.site;
       if (loading) $bus.$emit('loading', true);
-      dao.loadSiteLog(this.site).then(data => {
+      dao.getSite(this.site).then(data => this.siteInfo = data);
+      dao.loadSiteLog(this.site, this.pageNumber, this.zoom).then(data => {
         this.logs = data;
-        const chartData = [...data].reverse();
+        const chartData = [...data.content].reverse();
         if (this.chart == null) {
           this.chart = initChart();
         }
@@ -40,6 +48,22 @@ const ViewSite = {
         this.chart.update();
         if (loading) $bus.$emit('loading', false);
       });
+    },
+    pageOlder() {
+      this.pageNumber++;
+      this.refresh(true);
+    },
+    pageNewer() {
+      this.pageNumber = Math.max(this.pageNumber - 1, 0);
+      this.refresh(true);
+    },
+    zoomOut() {
+      this.zoom = Math.min(this.zoom + 1, 10);
+      this.refresh(true);
+    },
+    zoomIn() {
+      this.zoom = Math.max(this.zoom - 1, 1);
+      this.refresh(true);
     }
   }
 }

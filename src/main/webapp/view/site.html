@@ -1,6 +1,24 @@
 <div class="view-site">
 	<h3>Historia {{ site }}</h3>
+
+	<div class="zoom">
+		<a class="zoom-out" :disabled="zoom > 9" @click="zoomOut()">-</a>
+		Zoom {{ zoom }}
+		<a class="zoom-in" :disabled="zoom < 2" @click="zoomIn()">+</a>
+	</div>
+	<div class="paging" v-if="logs && logs.totalPages > 1">
+		<a class="paging-previous" :disabled="logs.last" @click="pageOlder()">Starsze</a>
+		-{{ logs.number * 2 }}h
+		<a class="paging-next" :disabled="logs.first" @click="pageNewer()">Nowsze</a>
+	</div>
+
 	<canvas id="chart" width="400" height="100"></canvas>
+
+	<ul class="info">
+		<li><label>{{ siteInfo.name }}:</label><a :href="siteInfo.url" target="_blank">{{ siteInfo.url }}</a></li>
+		<li v-if="logs"><label>AVG.:</label>{{ logs.avg }}ms</li>
+	</ul>
+
 	<div class="logs" v-if="logs">
 		<table class="std-table">
 		<thead>
@@ -12,7 +30,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr v-for="log in logs" :class="'status-' + log.status">
+		<tr v-for="log in logs.content" :class="'status-' + log.status">
 			<td class="status">{{ log.status }}</td>
 			<td class="content-length">{{ log.contentLength }}</td>
 			<td class="date">{{ log.date.replace('@', ' ') }}</td>

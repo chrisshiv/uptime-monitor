@@ -1,11 +1,11 @@
 package pl.findable.uptime.engine;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import org.springframework.data.repository.CrudRepository;
+interface LogRepository extends PagingAndSortingRepository<Log, Integer> {
 
-interface LogRepository extends CrudRepository<Log, Integer> {
-
-	List<Log> findTop100BySiteIdOrderByDateDesc(int id);
+	Page<Log> findBySiteIdOrderByDateDesc(Pageable pageable, int id);
 
 }

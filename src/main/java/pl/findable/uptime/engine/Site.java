@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import pl.findable.uptime.engine.Caller.Status;
 
 @Entity
 public class Site {
@@ -14,6 +17,8 @@ public class Site {
 	private String name;
 	private String url;
 	private int interval = 5;
+	@Transient
+	private Status currentStatus;
 
 	public int getId() {
 		return id;
@@ -41,6 +46,13 @@ public class Site {
 	}
 	public void setInterval(int interval) {
 		this.interval = interval;
+	}
+
+	public Status getCurrentStatus() {
+		return currentStatus;
+	}
+	public void setCurrentStatus(Status currentStatus) {
+		this.currentStatus = currentStatus;
 	}
 
 }
