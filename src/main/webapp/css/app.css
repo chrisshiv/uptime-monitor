@@ -197,7 +197,7 @@ ul.info label {
 	.std-table tr > :first-child {
 		display: none;
 	}
-	.paging {
+	.paging, .zoom {
 		display: none;
 	}
 }

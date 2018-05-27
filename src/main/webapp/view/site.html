@@ -8,7 +8,7 @@
 	</div>
 	<div class="paging" v-if="logs && logs.totalPages > 1">
 		<a class="paging-previous" :disabled="logs.last" @click="pageOlder()">Starsze</a>
-		-{{ logs.number * 2 }}h
+		-{{ pageNumber * 2 * Math.pow(2, zoom - 1) }}h
 		<a class="paging-next" :disabled="logs.first" @click="pageNewer()">Nowsze</a>
 	</div>
 

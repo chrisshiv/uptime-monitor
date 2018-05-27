@@ -13,11 +13,9 @@ class Dao {
   }
 
   loadSiteLog(site, pageNumber = 0, zoom = 1) {
-    const size = 120 * zoom;
-    return $.get('/api/log/' + site + '?size=' + size + '&page=' + pageNumber)
+    return $.get('/api/log/' + site + '?size=120&page=' + pageNumber + '&zoom=' + zoom)
       .then(data => {
         data.avg = Math.round(data.content.reduce((prev, current) => prev + current.responseTime, 0) / data.content.length);
-        data.content = data.content.filter((elem, i) => i % zoom == 0);
         return data;
       });
   }
